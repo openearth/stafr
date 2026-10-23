@@ -5,7 +5,7 @@
 #' @returns A tibble.
 #'
 #' @export
-read_data <- function(source) {
+read_staf_simple <- function(source) {
   
   stopifnot(
     is.character(source),
@@ -31,3 +31,6 @@ read_data <- function(source) {
   
   out
 }
+
+
+
