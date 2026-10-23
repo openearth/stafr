@@ -5,6 +5,8 @@
 #' @export
 run_pipeline <- function(environment = "dev") {
   
+  setup_logging()
+  
   cfg <- load_config(environment)
   
   raw <- read_staf_output(cfg)

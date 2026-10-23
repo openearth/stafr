@@ -1,23 +1,33 @@
-#' Read STAF output file
+#' Read CSV data from file or URL
 #'
-#' @param url Place to read STAF output from
+#' @param source Local file path or HTTP(S) URL.
+#'
+#' @returns A tibble.
 #'
 #' @export
-read_staf_output <- function(url) {
+read_data <- function(source) {
   
-  # check if url is correct
+  stopifnot(
+    is.character(source),
+    length(source) == 1L,
+    !is.na(source)
+  )
   
-   
-  # check if url contains the type of data that we expect
+  logger::log_info("Reading data from '{source}'")
   
-   
-  # read file
+  file <- resolve_source(source)
   
-   
-  # transform file to desired format
+  validate_csv(file)
   
-   
-  # return file as data.frame
+  out <- readr::read_csv(
+    file,
+    show_col_types = FALSE,
+    progress = FALSE
+  )
   
+  logger::log_info(
+    "Successfully read {nrow(out)} rows and {ncol(out)} columns."
+  )
   
+  out
 }
